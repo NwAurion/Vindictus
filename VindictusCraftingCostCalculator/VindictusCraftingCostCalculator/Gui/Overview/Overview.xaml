@@ -1,0 +1,45 @@
+﻿<Grid x:Class="VindictusCraftingCostCalculator.Gui.Overview.Overview"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+			 xmlns:gui="clr-namespace:VindictusCraftingCostCalculator.Gui"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300" Grid.IsSharedSizeScope="True">
+	<Grid.Resources>
+		<BooleanToVisibilityConverter x:Key="boolToVis"/>
+		<DataTemplate x:Key="ItemTemplate">
+			<Grid>
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Grid}, AncestorLevel=2}, Path=ColumnDefinitions[0].Width}" />
+					<ColumnDefinition SharedSizeGroup="B"/>
+					<ColumnDefinition SharedSizeGroup="C"/>
+					<ColumnDefinition SharedSizeGroup="D"/>
+					<ColumnDefinition Width="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Grid}, AncestorLevel=2}, Path=ColumnDefinitions[4].Width}" />
+				</Grid.ColumnDefinitions>
+				<!-- Header with materials icon etc. -->
+				<Image Grid.Column="0" Source="{Binding ImageUrl}" Width="32" Height="32"/>
+				<TextBlock  Grid.Column="1" Text="{Binding MaterialName}" VerticalAlignment="Center" Margin="0,0,10,0"/>
+				<TextBlock Grid.Column="2" Text="{Binding Amount}" VerticalAlignment="Center" Visibility="{Binding ShowAmount, Converter={StaticResource boolToVis}}"/>
+				<gui:SpinnerControl Grid.Column="4" Value="{Binding Cost, Mode=TwoWay}" Visibility="{Binding AllowAmountInput, Converter={StaticResource boolToVis}}" Tag="{Binding .}" HorizontalAlignment="Left" Margin="10,0,0,0"/>
+				<TextBlock Grid.Column="4" Text="{Binding Amount}" Margin="10,0,0,0" Visibility="{Binding ShowFeeTextBlock, Converter={StaticResource boolToVis}}" VerticalAlignment="Center"/>
+			</Grid>
+		</DataTemplate>
+	</Grid.Resources>
+	<Grid.ColumnDefinitions>
+		<ColumnDefinition Width="2*"/>
+		<ColumnDefinition Width="Auto" SharedSizeGroup="B"/>
+		<ColumnDefinition Width="Auto" SharedSizeGroup="C"/>
+		<ColumnDefinition Width="Auto" SharedSizeGroup="D"/>
+		<ColumnDefinition Width="3*"/>
+	</Grid.ColumnDefinitions>
+	<Grid.RowDefinitions>
+		<RowDefinition Height="Auto"/>
+		<RowDefinition/>
+	</Grid.RowDefinitions>
+	<Image Source="{StaticResource Icon_Material}" Width="32" Height="32" Grid.Column="0" Grid.Row="0"/>
+	<TextBlock Text="Name" Grid.Column="1" VerticalAlignment="Center"/>
+	<TextBlock Text="Amount" Grid.Column="2" VerticalAlignment="Center"/>
+	<TextBlock Text="Cost/each" Grid.Column="4" VerticalAlignment="Center" Margin="10,0,0,0"/>
+	<ItemsControl Grid.Row="1" Grid.ColumnSpan="5" ItemsSource="{Binding Materials}" ItemTemplate="{StaticResource ItemTemplate}"/>
+</Grid>

@@ -1,0 +1,45 @@
+﻿<Window x:Class="VindictusCraftingCostCalculator.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+		xmlns:local="clr-namespace:VindictusCraftingCostCalculator"
+		xmlns:gui="clr-namespace:VindictusCraftingCostCalculator.Gui"
+		xmlns:results="clr-namespace:VindictusCraftingCostCalculator.Gui.Results"
+		xmlns:overview="clr-namespace:VindictusCraftingCostCalculator.Gui.Overview"
+        Title="{Binding Path=FullVersionString, Source={x:Static Application.Current}}"
+		MinHeight="130" Width="1000"
+		Background="#1E1816" Foreground="White">
+	<Grid Name="contentGrid">
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition />
+			<ColumnDefinition />
+		</Grid.ColumnDefinitions>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition />
+			<RowDefinition Height="Auto"/>
+		</Grid.RowDefinitions>
+		<StackPanel Name="controls" Orientation="Horizontal"  Grid.Row="0" >
+			<TextBlock Text="Enter item or set:" VerticalAlignment="Center" Margin="5,0,5,0"/>
+			<TextBox Name="itemNameTextBox" Height="30" KeyDown="itemNameTextBox_KeyDown" VerticalContentAlignment="Center" Width="300" />
+			<Button Name="btSearch" Content="Search" Click="btSearch_Click"/>
+		</StackPanel>
+		<!-- #-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-# Anfang des Bereiches in dem die Materialien dargestellt werden #-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-->
+		<Grid Grid.Row="1" Name="searchResultsGrid">
+			<overview:Overview />
+		</Grid>
+		<!-- #-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-# Endes des Bereiches in dem die Materialien dargestellt werden #-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-->
+
+		<Button Name="btCalculate" Height="30"  Grid.Row="2" Content="Calculate" Click="btCalculate_Click" VerticalAlignment="Bottom" ToolTip="First use search"/>
+
+		<!-- #-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-# Anfang des Bereiches in dem die Kosten dargestellt werden #-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-->
+		<Grid Grid.Row="1" Grid.Column="1" Name="costResultsGrid">
+			<results:ResultsViewSingleItem x:Name="viewSingleItem" Visibility="Collapsed"/>
+			<results:ResultsViewSet x:Name="viewSet" Visibility="Collapsed"/>
+		</Grid>
+		<!-- #-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-# Ende des Bereiches in dem die Kosten dargestellt werden #-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-->
+		<StackPanel Grid.Column="1" VerticalAlignment="Bottom" Orientation="Horizontal">
+			<TextBlock Text="Kosten pro Enhancement Stone"/>
+			<gui:SpinnerControl/>
+		</StackPanel>
+	</Grid>
+</Window>
