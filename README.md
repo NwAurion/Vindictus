@@ -1,7 +1,9 @@
 Vindictus
 =========
 
-Tools I made for Vindictus. Well, actually only one tool, the Vindictus Crafting Cost Calculator. And with me having stopped playing Vindictus some months ago, it's unlikely i'll add more, but who knows.
+Tools I made for Vindictus. 
+
+Well, actually only one tool, the Vindictus Crafting Cost Calculator. And with me having stopped playing Vindictus some months ago, it's unlikely i'll add more, but who knows.
 
 Anyways, the Vindictus Crafting Cost Calculator allows users to calculate the cost to craft a single piece of equipment or a whole set at once. Prices have to be entered manually, as I can hardly pull them from the game itself even if I knew how.
 
