@@ -119,7 +119,8 @@ namespace VindictusCraftingCostCalculator
 
 			if (IsSet)
 			{
-				Materials = webClient.ReadSetFromDB(searchString, out item_found);
+				string url = webClient.FindSetURL(searchString, out item_found);
+                Materials = webClient.ReadSetFromDB(url);
 				ItemRecipes = webClient.ItemRecipes;
 			}
 			else
